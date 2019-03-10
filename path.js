@@ -43,7 +43,40 @@ class Path {
 
 
 
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.positions), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.positions), gl.STATIC_DRAW);
+
+            this.normalBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+
+            this.vertexNormals = [
+
+              // Top
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              // Top
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              // Top
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+              0.0,  1.0,  0.0,
+
+
+            ];
+
+          extended = this.vertexNormals
+          for(i=1;i<length_rep;i++){
+            this.vertexNormals = this.vertexNormals.concat(extended);
+          }
+
+
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals),
+          gl.STATIC_DRAW);
 
         // Build the element array buffer; this specifies the indices
         // into the vertex arrays for each face's vertices.
@@ -105,7 +138,7 @@ class Path {
 
   draw(gl, deltaTime, projectionMatrix, viewMatrix, programInfo){
 
-      this.pos[2]+=0.1;
+      // this.pos[2]+=0.1;
       var modelMatrix = mat4.create();
 
       mat4.translate(modelMatrix,modelMatrix,this.pos);
@@ -134,6 +167,25 @@ class Path {
               gl.enableVertexAttribArray(
                   programInfo.attribLocations.vertexPosition);
             }
+            // Tell WebGL how to pull out the normals from
+  					// the normal buffer into the vertexNormal attribute.
+  					{
+  						const numComponents = 3;
+  						const type = gl.FLOAT;
+  						const normalize = false;
+  						const stride = 0;
+  						const offset = 0;
+  						gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+  						gl.vertexAttribPointer(
+  								programInfo.attribLocations.vertexNormal,
+  								numComponents,
+  								type,
+  								normalize,
+  								stride,
+  								offset);
+  						gl.enableVertexAttribArray(
+  								programInfo.attribLocations.vertexNormal);
+  					}
 
             {
               const numComponents = 2;
@@ -153,6 +205,12 @@ class Path {
                   programInfo.attribLocations.textureCoord);
             }
 
+
+						const normalMatrix = mat4.create();
+						mat4.invert(normalMatrix, modelViewMatrix);
+						mat4.transpose(normalMatrix, normalMatrix);
+
+
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
             gl.useProgram(programInfo.program);
@@ -161,6 +219,12 @@ class Path {
                 programInfo.uniformLocations.projectionMatrix,
                 false,
                 projectionMatrix);
+
+            gl.uniformMatrix4fv(
+			      programInfo.uniformLocations.normalMatrix,
+			      false,
+			      normalMatrix);
+
             gl.uniformMatrix4fv(
                 programInfo.uniformLocations.modelViewMatrix,
                 false,
@@ -260,6 +324,64 @@ class Path {
 
 
           gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.positions), gl.STATIC_DRAW);
+////////////////////////////
+
+        this.normalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+
+        this.vertexNormals = [
+          // Right
+          1.0,  0.0,  0.0,
+          1.0,  0.0,  0.0,
+          1.0,  0.0,  0.0,
+          1.0,  0.0,  0.0,
+          // Left
+          -1.0,  0.0,  0.0,
+          -1.0,  0.0,  0.0,
+          -1.0,  0.0,  0.0,
+          -1.0,  0.0,  0.0,
+          // Top
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          // Top
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+        	// Front
+        	0.0,  0.0,  1.0,
+        	0.0,  0.0,  1.0,
+        	0.0,  0.0,  1.0,
+        	0.0,  0.0,  1.0,
+        	// Front
+        	0.0,  0.0,  1.0,
+        	0.0,  0.0,  1.0,
+        	0.0,  0.0,  1.0,
+        	0.0,  0.0,  1.0,
+          // Top
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          // Top
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0,
+          0.0,  1.0,  0.0
+
+        ];
+
+          extended = this.vertexNormals
+          for(i=1;i<length_rep;i++){
+            this.vertexNormals = this.vertexNormals.concat(extended);
+          }
+
+
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals),
+      gl.STATIC_DRAW);
+
 
           // Build the element array buffer; this specifies the indices
           // into the vertex arrays for each face's vertices.
@@ -382,7 +504,25 @@ class Path {
                 gl.enableVertexAttribArray(
                     programInfo.attribLocations.vertexPosition);
               }
-
+              // Tell WebGL how to pull out the normals from
+    					// the normal buffer into the vertexNormal attribute.
+    					{
+    						const numComponents = 3;
+    						const type = gl.FLOAT;
+    						const normalize = false;
+    						const stride = 0;
+    						const offset = 0;
+    						gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+    						gl.vertexAttribPointer(
+    								programInfo.attribLocations.vertexNormal,
+    								numComponents,
+    								type,
+    								normalize,
+    								stride,
+    								offset);
+    						gl.enableVertexAttribArray(
+    								programInfo.attribLocations.vertexNormal);
+    					}
               {
                 const numComponents = 2;
                 const type = gl.FLOAT;
@@ -401,6 +541,12 @@ class Path {
                     programInfo.attribLocations.textureCoord);
               }
 
+
+							const normalMatrix = mat4.create();
+							mat4.invert(normalMatrix, modelViewMatrix);
+							mat4.transpose(normalMatrix, normalMatrix);
+
+
               gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
               gl.useProgram(programInfo.program);
@@ -409,6 +555,12 @@ class Path {
                   programInfo.uniformLocations.projectionMatrix,
                   false,
                   projectionMatrix);
+
+							gl.uniformMatrix4fv(
+				      programInfo.uniformLocations.normalMatrix,
+				      false,
+				      normalMatrix);
+
               gl.uniformMatrix4fv(
                   programInfo.uniformLocations.modelViewMatrix,
                   false,
@@ -443,10 +595,10 @@ class Path {
 
             this.positions = [
 
-              -45.0,-24,-50.0,//0
-               45.0,-24,-50.0,//1
-              -45.0,24 ,-50.0,//2
-               45.0,24 ,-50.0,//3
+              -90.0,-48,-100.0,//0
+               90.0,-48,-100.0,//1
+              -90.0,48 ,-100.0,//2
+               90.0,48 ,-100.0,//3
 
             ];
 

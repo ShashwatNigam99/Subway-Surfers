@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <title>Subway Surfers</title>
@@ -7,8 +8,20 @@
   </head>
 
   <body>
+    <div id="overlay">
+      <div>Score:
+        <span id="score"></span>
+      </div>
+      <div>Speed:
+        <span id="speed"></span>
+      </div>
+    </div>
+    <div id ="death">
+      <span id="life"></span>
+    </div>
     <canvas id="glcanvas" width="1900" height="960"></canvas>
   </body>
+
   <script src="gl-matrix.js"></script>
   <script src="mousetrap.js"></script>
   <script src="sound.js"></script>
@@ -16,5 +29,8 @@
   <script src="path.js"></script>
   <script src="surfer.js"></script>
   <script src="barriers.js"></script>
+  <script src="train.js"></script>
+  <script src="powerups.js"></script>
   <script src="main.js"></script>
-  </html>
+
+</html>

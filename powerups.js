@@ -1,133 +1,133 @@
-class Barrier1 {
+class Jetpack {
 
 	init(gl, pos){
 
 				this.pos = pos;
         this.rotation = 0
-        this.texture = loadTexture(gl, './textures/barrier1.png');
+        this.texture = loadTexture(gl, './textures/jetpack.jpg');
 
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
         this.positions = [
 					// Front face
-          -0.5, -0.3,  0.1,
-           0.5, -0.3,  0.1,
-           0.5,  0.3,  0.1,
-          -0.5,  0.3,  0.1,
+          -0.3, -0.3,  0.3,
+           0.3, -0.3,  0.3,
+           0.3,  0.3,  0.3,
+          -0.3,  0.3,  0.3,
 
           // Back face
-          -0.5, -0.3, -0.1,
-          -0.5,  0.3, -0.1,
-           0.5,  0.3, -0.1,
-           0.5, -0.3, -0.1,
+          -0.3, -0.3, -0.3,
+           0.3, -0.3, -0.3,
+           0.3,  0.3, -0.3,
+          -0.3,  0.3, -0.3,
 
           // Top face
-          -0.5,  0.3, -0.1,
-          -0.5,  0.3,  0.1,
-           0.5,  0.3,  0.1,
-           0.5,  0.3, -0.1,
+          -0.3,  0.3, -0.3,
+          -0.3,  0.3,  0.3,
+           0.3,  0.3,  0.3,
+           0.3,  0.3, -0.3,
 
           // Bottom face
-          -0.5, -0.3, -0.1,
-           0.5, -0.3, -0.1,
-           0.5, -0.3,  0.1,
-          -0.5, -0.3,  0.1,
+          -0.3, -0.3, -0.3,
+           0.3, -0.3, -0.3,
+           0.3, -0.3,  0.3,
+          -0.3, -0.3,  0.3,
 
           // Right face
-           0.5, -0.3, -0.1,
-           0.5,  0.3, -0.1,
-           0.5,  0.3,  0.1,
-           0.5, -0.3,  0.1,
+           0.3, -0.3, -0.3,
+           0.3,  0.3, -0.3,
+           0.3,  0.3,  0.3,
+           0.3, -0.3,  0.3,
 
           // Left face
-          -0.5, -0.3, -0.1,
-          -0.5, -0.3,  0.1,
-          -0.5,  0.3,  0.1,
-          -0.5,  0.3, -0.1,
-
+          -0.3, -0.3, -0.3,
+					-0.3,  0.3, -0.3,
+					-0.3,  0.3,  0.3,
+          -0.3, -0.3,  0.3,
         ];
 
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.positions), gl.STATIC_DRAW);
 ///////////////////////////////
 
-				this.normalBuffer = gl.createBuffer();
-				gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+this.normalBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
 
-				this.vertexNormals = [
-					// Front
-					0.0,  0.0,  1.0,
-					0.0,  0.0,  1.0,
-					0.0,  0.0,  1.0,
-					0.0,  0.0,  1.0,
+this.vertexNormals = [
+	// Front
+	0.0,  0.0,  1.0,
+	0.0,  0.0,  1.0,
+	0.0,  0.0,  1.0,
+	0.0,  0.0,  1.0,
 
-					// Back
-					0.0,  0.0, -1.0,
-					0.0,  0.0, -1.0,
-					0.0,  0.0, -1.0,
-					0.0,  0.0, -1.0,
+	// Back
+	0.0,  0.0, -1.0,
+	0.0,  0.0, -1.0,
+	0.0,  0.0, -1.0,
+	0.0,  0.0, -1.0,
 
-					// Top
-					0.0,  1.0,  0.0,
-					0.0,  1.0,  0.0,
-					0.0,  1.0,  0.0,
-					0.0,  1.0,  0.0,
+	// Top
+	0.0,  1.0,  0.0,
+	0.0,  1.0,  0.0,
+	0.0,  1.0,  0.0,
+	0.0,  1.0,  0.0,
 
-					// Bottom
-					0.0, -1.0,  0.0,
-					0.0, -1.0,  0.0,
-					0.0, -1.0,  0.0,
-					0.0, -1.0,  0.0,
+	// Bottom
+	0.0, -1.0,  0.0,
+	0.0, -1.0,  0.0,
+	0.0, -1.0,  0.0,
+	0.0, -1.0,  0.0,
 
-					// Right
-					1.0,  0.0,  0.0,
-					1.0,  0.0,  0.0,
-					1.0,  0.0,  0.0,
-					1.0,  0.0,  0.0,
+	// Right
+	1.0,  0.0,  0.0,
+	1.0,  0.0,  0.0,
+	1.0,  0.0,  0.0,
+	1.0,  0.0,  0.0,
 
-					// Left
-					-1.0,  0.0,  0.0,
-					-1.0,  0.0,  0.0,
-					-1.0,  0.0,  0.0,
-					-1.0,  0.0,  0.0
-				];
+	// Left
+	-1.0,  0.0,  0.0,
+	-1.0,  0.0,  0.0,
+	-1.0,  0.0,  0.0,
+	-1.0,  0.0,  0.0
+];
 
-				gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals),
-				gl.STATIC_DRAW);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals),
+gl.STATIC_DRAW);
 
 /////////////////////////////
 	      this.textureCoordBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
 
         this.textureCoordinates = [
-					0.0,  1.0,
+					// Front
 					1.0,  1.0,
-					1.0,  0.0,
-          0.0,  0.0,
-
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
+          1.0,  0.0,
+					// Front
+					1.0,  1.0,
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
+          1.0,  0.0,
+          // Top
+          0.0,  0.0,
+          1.0,  0.0,
+          1.0,  1.0,
+          0.0,  1.0,
+          // Bottom
+          0.0,  0.0,
+          1.0,  0.0,
+          1.0,  1.0,
+          0.0,  1.0,
+          // Right
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
+          1.0,  0.0,
+					1.0,  1.0,
+          // left
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
-					0.0,  1.0,
+          1.0,  0.0,
 					1.0,  1.0,
-					1.0,  0.0,
-          0.0,  0.0,
 
         ];
 
@@ -143,7 +143,7 @@ class Barrier1 {
           8,  9,  10,     8,  10, 11,   // top
           12, 13, 14,     12, 14, 15,   // bottom
           16, 17, 18,     16, 18, 19,   // right
-          20, 21, 22,     20, 22, 23    // left
+          20, 21, 22,     20, 22, 23,   // left
         ];
 
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,
@@ -157,7 +157,9 @@ class Barrier1 {
     // this.pos[2]+=0.1;
     mat4.translate(modelMatrix,modelMatrix,this.pos);
 
-	  mat4.rotate(modelMatrix, modelMatrix, this.rotation, [0,0,1]);
+		this.rotation += Math.PI / (((Math.random()) % 100) + 50)
+
+	  mat4.rotate(modelMatrix, modelMatrix, this.rotation, [0,1,0]);
 
     var modelViewMatrix = mat4.create();
     mat4.multiply(modelViewMatrix, viewMatrix, modelMatrix);
@@ -258,136 +260,136 @@ class Barrier1 {
 		return gl;
     }
 }
-class Rumbler {
+class Jumper {
 
 	init(gl, pos){
 
 				this.pos = pos;
         this.rotation = 0
-        this.texture = loadTexture(gl, './textures/rumblers.jpg');
+        this.texture = loadTexture(gl, './textures/jumpers.jpg');
 
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
         this.positions = [
 					// Front face
-          -0.5, -0.25,  0.3,
-           0.5, -0.25,  0.3,
-           0.5,  0.25,  0.3,
-          -0.5,  0.25,  0.3,
+          -0.25, -0.25,  0.25,
+           0.25, -0.25,  0.25,
+           0.25,  0.25,  0.25,
+          -0.25,  0.25,  0.25,
 
           // Back face
-          -0.5, -0.25, -0.3,
-          -0.5,  0.25, -0.3,
-           0.5,  0.25, -0.3,
-           0.5, -0.25, -0.3,
+          -0.25, -0.25, -0.25,
+           0.25, -0.25, -0.25,
+           0.25,  0.25, -0.25,
+          -0.25,  0.25, -0.25,
 
           // Top face
-          -0.5,  0.25, -0.3,
-          -0.5,  0.25,  0.3,
-           0.5,  0.25,  0.3,
-           0.5,  0.25, -0.3,
+          -0.25,  0.25, -0.25,
+          -0.25,  0.25,  0.25,
+           0.25,  0.25,  0.25,
+           0.25,  0.25, -0.25,
 
           // Bottom face
-          -0.5, -0.25, -0.3,
-           0.5, -0.25, -0.3,
-           0.5, -0.25,  0.3,
-          -0.5, -0.25,  0.3,
+          -0.25, -0.25, -0.25,
+           0.25, -0.25, -0.25,
+           0.25, -0.25,  0.25,
+          -0.25, -0.25,  0.25,
 
           // Right face
-           0.5, -0.25, -0.3,
-           0.5,  0.25, -0.3,
-           0.5,  0.25,  0.3,
-           0.5, -0.25,  0.3,
+           0.25, -0.25, -0.25,
+           0.25,  0.25, -0.25,
+           0.25,  0.25,  0.25,
+           0.25, -0.25,  0.25,
 
           // Left face
-          -0.5, -0.25, -0.3,
-          -0.5, -0.25,  0.3,
-          -0.5,  0.25,  0.3,
-          -0.5,  0.25, -0.3,
-
+          -0.25, -0.25, -0.25,
+					-0.25,  0.25, -0.25,
+					-0.25,  0.25,  0.25,
+          -0.25, -0.25,  0.25,
         ];
 
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.positions), gl.STATIC_DRAW);
 ///////////////////////////////
 
-				this.normalBuffer = gl.createBuffer();
-				gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+this.normalBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
 
-				this.vertexNormals = [
-					// Front
-					0.0,  0.0,  1.0,
-					0.0,  0.0,  1.0,
-					0.0,  0.0,  1.0,
-					0.0,  0.0,  1.0,
+this.vertexNormals = [
+	// Front
+	0.0,  0.0,  1.0,
+	0.0,  0.0,  1.0,
+	0.0,  0.0,  1.0,
+	0.0,  0.0,  1.0,
 
-					// Back
-					0.0,  0.0, -1.0,
-					0.0,  0.0, -1.0,
-					0.0,  0.0, -1.0,
-					0.0,  0.0, -1.0,
+	// Back
+	0.0,  0.0, -1.0,
+	0.0,  0.0, -1.0,
+	0.0,  0.0, -1.0,
+	0.0,  0.0, -1.0,
 
-					// Top
-					0.0,  1.0,  0.0,
-					0.0,  1.0,  0.0,
-					0.0,  1.0,  0.0,
-					0.0,  1.0,  0.0,
+	// Top
+	0.0,  1.0,  0.0,
+	0.0,  1.0,  0.0,
+	0.0,  1.0,  0.0,
+	0.0,  1.0,  0.0,
 
-					// Bottom
-					0.0, -1.0,  0.0,
-					0.0, -1.0,  0.0,
-					0.0, -1.0,  0.0,
-					0.0, -1.0,  0.0,
+	// Bottom
+	0.0, -1.0,  0.0,
+	0.0, -1.0,  0.0,
+	0.0, -1.0,  0.0,
+	0.0, -1.0,  0.0,
 
-					// Right
-					1.0,  0.0,  0.0,
-					1.0,  0.0,  0.0,
-					1.0,  0.0,  0.0,
-					1.0,  0.0,  0.0,
+	// Right
+	1.0,  0.0,  0.0,
+	1.0,  0.0,  0.0,
+	1.0,  0.0,  0.0,
+	1.0,  0.0,  0.0,
 
-					// Left
-					-1.0,  0.0,  0.0,
-					-1.0,  0.0,  0.0,
-					-1.0,  0.0,  0.0,
-					-1.0,  0.0,  0.0
-				];
+	// Left
+	-1.0,  0.0,  0.0,
+	-1.0,  0.0,  0.0,
+	-1.0,  0.0,  0.0,
+	-1.0,  0.0,  0.0
+];
 
-				gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals),
-				gl.STATIC_DRAW);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals),
+gl.STATIC_DRAW);
 
 /////////////////////////////
 	      this.textureCoordBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.textureCoordBuffer);
 
         this.textureCoordinates = [
-					0.0,  1.0,
+					// Front
 					1.0,  1.0,
-					1.0,  0.0,
-          0.0,  0.0,
-
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
+          1.0,  0.0,
+					// Front
+					1.0,  1.0,
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
+          1.0,  0.0,
+          // Top
+          0.0,  0.0,
+          1.0,  0.0,
+          1.0,  1.0,
+          0.0,  1.0,
+          // Bottom
+          0.0,  0.0,
+          1.0,  0.0,
+          1.0,  1.0,
+          0.0,  1.0,
+          // Right
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
+          1.0,  0.0,
+					1.0,  1.0,
+          // left
 					0.0,  1.0,
-					1.0,  1.0,
-					1.0,  0.0,
           0.0,  0.0,
-
-					0.0,  1.0,
+          1.0,  0.0,
 					1.0,  1.0,
-					1.0,  0.0,
-          0.0,  0.0,
 
         ];
 
@@ -417,7 +419,9 @@ class Rumbler {
     // this.pos[2]+=0.1;
     mat4.translate(modelMatrix,modelMatrix,this.pos);
 
-	  mat4.rotate(modelMatrix, modelMatrix, this.rotation, [0,0,1]);
+		this.rotation += Math.PI / (((Math.random()) % 100) + 50)
+
+	  mat4.rotate(modelMatrix, modelMatrix, this.rotation, [0,1,0]);
 
     var modelViewMatrix = mat4.create();
     mat4.multiply(modelViewMatrix, viewMatrix, modelMatrix);
