@@ -38,6 +38,38 @@ var distance = 0;
 var paused = false;
 main();
 
+var myElement = document.getElementById("game");
+var mc = new Hammer(myElement);
+
+//enable all directions
+mc.get('swipe').set({
+  direction: Hammer.DIRECTION_ALL,
+  threshold: 1,
+  velocity:0.1
+});
+
+// listen to events...
+mc.on("swiperight", function(ev) {
+  if(surfer.pos[0]<2.5)
+    surfer.pos[0]+=2.5;
+});
+mc.on("swipeleft", function(ev) {
+  if(surfer.pos[0]>-2.5)
+    surfer.pos[0]-=2.5;
+});
+mc.on("swipeup", function(ev) {
+  // W or space
+  if(surfer.jumping == 0){
+    surfer.jumping = 1;
+  }
+});
+
+
+
+
+
+
+
 Mousetrap.bind('space', function () {
 
   console.log('fuck this shit');
